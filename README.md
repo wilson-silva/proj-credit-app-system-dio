@@ -21,7 +21,7 @@
     </a>
 </p>
 <p>
-Este projeto foi desenvolvido através do curso oferecido pela Digital Innovation One.
+Este projeto está sendo desenvolvido através do curso oferecido pela Digital Innovation One.
 
 Descrição:
 Uma empresa de empréstimos precisa criar um sistema de análise de solicitação de crédito.
