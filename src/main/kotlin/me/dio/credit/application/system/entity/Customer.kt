@@ -8,7 +8,7 @@ import java.math.BigDecimal
 data class Customer(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
+    var id: Long? = null,
 
     @Column(nullable = false)
     var firstName: String = "",
@@ -17,7 +17,7 @@ data class Customer(
     var lastName: String = "",
 
     @Column(nullable = false, unique = true)
-    val cpf: String = "",
+    var cpf: String = "",
 
     @Column(nullable = false, unique = true)
     var email: String = "",
