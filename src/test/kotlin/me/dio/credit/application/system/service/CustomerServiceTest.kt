@@ -12,7 +12,8 @@ import me.dio.credit.application.system.entity.Customer
 import me.dio.credit.application.system.exception.BusinessException
 import me.dio.credit.application.system.repository.CustomerRepository
 import me.dio.credit.application.system.service.impl.CustomerService
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import java.math.BigDecimal
@@ -32,8 +33,8 @@ class CustomerServiceTest {
 
         val actual: Customer = customerService.save(fakeCustomer)
 
-        Assertions.assertThat(actual).isNotNull
-        Assertions.assertThat(actual).isSameAs(fakeCustomer)
+        assertThat(actual).isNotNull
+        assertThat(actual).isSameAs(fakeCustomer)
         verify(exactly = 1) { customerRepository.save(fakeCustomer) }
     }
 
@@ -46,9 +47,9 @@ class CustomerServiceTest {
 
         val actual: Customer = customerService.findById(fakeId)
 
-        Assertions.assertThat(actual).isNotNull
-        Assertions.assertThat(actual).isExactlyInstanceOf(Customer::class.java)
-        Assertions.assertThat(actual).isSameAs(fakeCustomer)
+        assertThat(actual).isNotNull
+        assertThat(actual).isExactlyInstanceOf(Customer::class.java)
+        assertThat(actual).isSameAs(fakeCustomer)
         verify(exactly = 1) { customerRepository.findById(fakeId) }
     }
 
@@ -58,7 +59,7 @@ class CustomerServiceTest {
         val fakeId: Long = Random().nextLong()
         every { customerRepository.findById(fakeId) } returns Optional.empty()
 
-        Assertions.assertThatExceptionOfType(BusinessException::class.java)
+        assertThatExceptionOfType(BusinessException::class.java)
             .isThrownBy { customerService.findById(fakeId) }
             .withMessage("Id $fakeId not found")
         verify(exactly = 1) { customerRepository.findById(fakeId) }

@@ -14,6 +14,8 @@ import me.dio.credit.application.system.repository.CreditRepository
 import me.dio.credit.application.system.service.impl.CreditService
 import me.dio.credit.application.system.service.impl.CustomerService
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -55,8 +57,8 @@ class CreditServiceTest {
         verify(exactly = 1) { customerService.findById(customerId) }
         verify(exactly = 1) { creditRepository.save(credit) }
 
-        Assertions.assertThat(actual).isNotNull
-        Assertions.assertThat(actual).isSameAs(credit)
+        assertThat(actual).isNotNull
+        assertThat(actual).isSameAs(credit)
     }
 
     @Test
@@ -66,7 +68,7 @@ class CreditServiceTest {
         val credit: Credit = buildCredit(dayFirstInstallment = invalidDayFirstInstallment)
         every { creditRepository.save(credit) } answers { credit }
 
-        Assertions.assertThatThrownBy { creditService.save(credit) }
+        assertThatThrownBy { creditService.save(credit) }
             .isInstanceOf(BusinessException::class.java)
             .hasMessage("Invalid Date")
 
@@ -82,9 +84,9 @@ class CreditServiceTest {
 
         val actual: List<Credit> = creditService.findAllByCustomer(customerId)
 
-        Assertions.assertThat(actual).isNotNull
-        Assertions.assertThat(actual).isNotEmpty
-        Assertions.assertThat(actual).isSameAs(expectedCredits)
+        assertThat(actual).isNotNull
+        assertThat(actual).isNotEmpty
+        assertThat(actual).isSameAs(expectedCredits)
 
         verify(exactly = 1) { creditRepository.findAllByCustomerId(customerId) }
     }
@@ -100,8 +102,8 @@ class CreditServiceTest {
 
         val actual: Credit = creditService.findByCreditCode(customerId, creditCode)
 
-        Assertions.assertThat(actual).isNotNull
-        Assertions.assertThat(actual).isSameAs(credit)
+        assertThat(actual).isNotNull
+        assertThat(actual).isSameAs(credit)
 
         verify(exactly = 1) { creditRepository.findByCreditCode(creditCode) }
     }
