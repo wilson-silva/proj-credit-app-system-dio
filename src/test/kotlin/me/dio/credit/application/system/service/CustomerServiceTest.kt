@@ -39,7 +39,7 @@ class CustomerServiceTest {
 
     @Test
     fun `should find customer by id`() {
-    
+
         val fakeId: Long = Random().nextLong()
         val fakeCustomer: Customer = buildCustomer(id = fakeId)
         every { customerRepository.findById(fakeId) } returns Optional.of(fakeCustomer)
