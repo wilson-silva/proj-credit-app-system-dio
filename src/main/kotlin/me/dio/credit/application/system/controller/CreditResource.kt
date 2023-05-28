@@ -1,5 +1,9 @@
 package me.dio.credit.application.system.controller
 
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import me.dio.credit.application.system.dto.CreditDto
 import me.dio.credit.application.system.dto.CreditView
@@ -20,15 +24,29 @@ import java.util.stream.Collectors
 
 @RestController
 @RequestMapping("/api/credits")
+@Tag(name = "Credit Resource (Controller)")
 class CreditResource(
     private val creditService: CreditService
 ) {
+    @Operation(summary = "create a credit", description = "Returns 201 if successful")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "201", description = "Successful Operation")
+        ]
+    )
     @PostMapping
     fun saveCredit(@RequestBody @Valid creditDto: CreditDto): ResponseEntity<String> {
         val creditSaved = this.creditService.save(creditDto.toEntity())
         return ResponseEntity.status(HttpStatus.CREATED).body("Credit ${creditSaved.creditCode} - Customer ${creditSaved.customer?.firstName} saved!")
     }
 
+    @Operation(summary = "returns a credit by customer_id", description = "Returns 200 if successful")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Successful Operation"),
+            ApiResponse(responseCode = "404", description = "Such a credit does not exist"),
+        ]
+    )
     @GetMapping
     fun findAllByCustomerId(@RequestParam(value = "customerId") customerId: Long): ResponseEntity<List<CreditViewList>> {
         val creditViewLists = this.creditService.findAllByCustomer(customerId).stream()
@@ -37,6 +55,13 @@ class CreditResource(
         return ResponseEntity.status(HttpStatus.OK).body(creditViewLists)
     }
 
+    @Operation(summary = "returns a credit by creditCode", description = "Returns 200 if successful")
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Successful Operation"),
+            ApiResponse(responseCode = "404", description = "Such a credit does not exist"),
+        ]
+    )
     @GetMapping("/{creditCode}")
     fun findbyCreditCode(
         @RequestParam(value = "customerId") customerId: Long,

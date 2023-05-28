@@ -21,7 +21,7 @@
     </a>
 </p>
 <p>
-Este projeto está sendo desenvolvido através do curso oferecido pela Digital Innovation One, ministrado pela nossa colega Camila Cavalvante.
+Este projeto foi desenvolvido através do curso oferecido pela Digital Innovation One, ministrado pela nossa colega Camila Cavalvante.
 
 Descrição:
 Uma empresa de empréstimos precisa criar um sistema de análise de solicitação de crédito.
@@ -29,6 +29,13 @@ Uma empresa de empréstimos precisa criar um sistema de análise de solicitaçã
 Tarefa:
 Criar uma API REST SPRING BOOT E KOTLIN para a empresa fornecer aos seus clientes diversas funcionalidades.
 </p>
+
+### Pré-requisitos:
+
+* Java 17 ou versões superiores.
+* Intellj IDEA Community Edition ou sua IDE favorita.
+* Controle de versão GIT instalado na sua máquina.
+* Banco H2
 
 <h3>Descrição do Projeto</h3>
 <figure>
@@ -38,6 +45,15 @@ Criar uma API REST SPRING BOOT E KOTLIN para a empresa fornecer aos seus cliente
 </p>
 </figure>
 
+
+### Técnicas e tecnologias utilizadas
+- Kotlin
+- Intellij
+- Spring Boot
+- Maven
+- Banco H2
+- Flyway
+
 <h3>Instrução de Uso</h3>
 <p>No Terminal/Console:</p>
 <ol>
@@ -46,6 +62,14 @@ Criar uma API REST SPRING BOOT E KOTLIN para a empresa fornecer aos seus cliente
 	<li>Execute o comando: <code>./gradlew bootrun</code></li>
 </ol>
 <h6>** Visando facilitar a demostração da aplicação, recomendo instalar apenas o IntelliJ IDEA e executar o projeto através da IDE **</h6>
+
+### Testar aplicação
+
+É possível testar a aplicação pelo Postman ou via Swagger
+
+Swagger
+
+http://localhost:8080/swagger-ui/index.html#/
 
 
 
