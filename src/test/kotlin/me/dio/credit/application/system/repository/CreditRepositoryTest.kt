@@ -54,7 +54,7 @@ class CreditRepositoryTest {
     fun `should find all credits by customer id`() {
         val customerId: Long =  1L
         val creditList: List<Credit> = creditRepository.findAllByCustomerId(customerId)
-  
+
         assertThat(creditList).isNotEmpty
         assertThat(creditList.size).isEqualTo(2)
         assertThat(creditList).contains(credit1, credit2)
